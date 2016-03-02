@@ -1,10 +1,13 @@
 import UIKit
+
 class TableView : UITableViewController
 {
     var colleges : [College] = []
     var t1 : UITextField!
     var t2 : UITextField!
     var t3 : UITextField!
+    var t4 : UITextField!
+    
     var tableCell : TableCell!
     override func viewDidLoad()
     {
@@ -54,6 +57,11 @@ class TableView : UITableViewController
                 (textField: UITextField) -> Void in textField.placeholder = "(Location)"
                 self.t3 = textField
             }
+        alert.addTextFieldWithConfigurationHandler
+            {
+                (textField:UITextField) -> Void in textField.placeholder = "Website"
+                self.t4 = textField
+            }
         alert.addAction(action)
         alert.addAction(action2)
         presentViewController(alert, animated: true, completion: nil)
@@ -87,7 +95,7 @@ class TableView : UITableViewController
     
     func newCell()
     {
-        colleges.append(College(n: t1.text!, nos: (Int)(t2.text!)!, l: t3.text!))
+        colleges.append(College(n: t1.text!, nos: (Int)(t2.text!)!, l: t3.text!, w: t4.text!))
         self.tableView.reloadData()
     }
     
@@ -103,6 +111,7 @@ class TableView : UITableViewController
                         destinationVC.n = colleges[i].name
                         destinationVC.l = colleges[i].location
                         destinationVC.e = colleges[i].numberOfStudents
+                        destinationVC.w = colleges[i].wsite
                     }
                 }
                 destinationVC.colleges = self.colleges
